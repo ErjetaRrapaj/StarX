@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="sq">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Match With Your Future - Test Results</title>
+    <style>
+      /* Reset and base styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      /* Navigation */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #1a1e3b;
+        color: white;
+        padding: 0.5rem 2rem;
+        position: relative;
+      }
+
+      .navbar .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1rem;
+        color: white;
+        text-decoration: none;
+        font-weight: normal;
+      }
+
+      .logo span {
+        font-weight: 600;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #8ecae6;
+      }
+
+      .get-in-touch {
+        color: #3db4b9;
+        font-weight: 500;
+      }
+
+      /* Success banner */
+      .success-banner {
+        background: linear-gradient(to right, #5d48e0, #8e44e3);
+        color: white;
+        text-align: center;
+        padding: 3rem 1rem;
+      }
+
+      .success-banner h1 {
+        font-size: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .medal-icon {
+        width: 70px;
+        height: 70px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+      }
+
+      /* Test information */
+      .test-info {
+        max-width: 800px;
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+      }
+
+      .test-header {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .test-meta {
+        color: #666;
+        margin-bottom: 1rem;
+      }
+
+      .share-button {
+        display: inline-flex;
+        align-items: center;
+        background-color: #f0f0f0;
+        border: none;
+        border-radius: 20px;
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+        color: #333;
+        cursor: pointer;
+      }
+
+      .share-button svg {
+        margin-right: 0.5rem;
+      }
+
+      /* Results sections */
+      .results-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+
+      .section-header {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      .result-card {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .card-icon {
+        width: 60px;
+        height: 60px;
+        background-color: #e8eefd;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+
+      .card-title {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .card-value {
+        font-size: 1.2rem;
+        color: #4756df;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .card-description {
+        font-size: 0.85rem;
+        color: #666;
+      }
+
+      /* Detailed results section */
+      .detailed-results {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+      }
+
+      .detailed-title {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      .detailed-text {
+        font-size: 0.9rem;
+        color: #555;
+        margin-bottom: 1.5rem;
+        line-height: 1.7;
+      }
+
+      .strengths-weaknesses {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-top: 1.5rem;
+      }
+
+      .strengths-section h4,
+      .qualities-section h4 {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      .strength-item,
+      .quality-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 0.8rem;
+      }
+
+      .strength-item svg,
+      .quality-item svg {
+        flex-shrink: 0;
+        margin-right: 0.5rem;
+        margin-top: 0.2rem;
+      }
+
+      .strength-text,
+      .quality-text {
+        font-size: 0.9rem;
+        color: #555;
+      }
+
+      /* Skills section */
+      .skills-section {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+      }
+
+      .skills-title {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        color: #333;
+      }
+
+      .skill-item {
+        margin-bottom: 1rem;
+      }
+
+      .skill-name {
+        font-size: 0.9rem;
+        margin-bottom: 0.3rem;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .skill-percentage {
+        color: #666;
+      }
+      .skill-percentage-2 {
+        color: #9334ea;
+      }
+
+      .skill-bar {
+        height: 10px;
+        background-color: #eaecef;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .skill-progress {
+        height: 100%;
+        background-color: #4756df;
+        border-radius: 5px;
+      }
+      .skill-progress-2 {
+        height: 100%;
+        background-color: #9334ea;
+        border-radius: 5px;
+      }
+
+      /* Interests section */
+      .interests-section {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+      }
+
+      .interests-title {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        color: #333;
+      }
+
+      /* Back to tests button */
+      .back-button {
+        display: block;
+        width: 100%;
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+        background-color: #4756df;
+        color: white;
+        text-align: center;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s;
+      }
+
+      .back-button:hover {
+        background-color: #3a46b8;
+      }
+
+      /* Footer */
+      .footer {
+        background-color: #1a1e3b;
+        color: white;
+        text-align: center;
+        padding: 1.5rem;
+        margin-top: 3rem;
+      }
+
+      .footer p {
+        font-size: 0.9rem;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .navbar {
+          flex-direction: column;
+          padding: 1rem;
+        }
+
+        .nav-links {
+          margin-top: 1rem;
+          gap: 1rem;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .strengths-weaknesses {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+      }
+    </style>
+    <link rel="icon" type="image/x-icon" href="tbu.ico" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <a href="#" class="logo">
+        <img src="tbu.png" alt="" />
+        <span>Match With Your Future</span>
+      </a>
+      <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="challenges.html">Challenges</a>
+        <a href="university.html">University</a>
+        <a href="profil.html">Profile</a>
+        <a href="contact.html" class="get-in-touch">Get In Touch</a>
+      </div>
+    </nav>
+
+    <!-- Success Banner -->
+    <section class="success-banner">
+      <div class="medal-icon">
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="white"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="8" r="7"></circle>
+          <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+        </svg>
+      </div>
+      <h1>Urime! Keni përfunduar testin me sukses</h1>
+    </section>
+
+    <!-- Test Information -->
+    <div class="test-info">
+      <h2 class="test-header">
+        Testi i Personalitetit dhe Interesave Profesionale
+      </h2>
+      <p class="test-meta">Përfunduar më 2 Maj 2025 · 18 minuta</p>
+      <button class="share-button">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+          <polyline points="16 6 12 2 8 6"></polyline>
+          <line x1="12" y1="2" x2="12" y2="15"></line>
+        </svg>
+        Shkarko Rezultatet
+      </button>
+    </div>
+
+    <!-- Results Container -->
+    <div class="results-container">
+      <h3 class="section-header">Përmbledhje</h3>
+
+      <!-- Personality Type Card -->
+      <div class="result-card">
+        <div class="card-icon">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#4756df"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+        </div>
+        <h4 class="card-title">Tipi i personalitetit</h4>
+        <p class="card-value">Analitik-Kreativ</p>
+        <p class="card-description">
+          Klikoni në seksion "Profili i Personalitetit" për më shumë detaje
+        </p>
+      </div>
+
+      <!-- Program Match Card -->
+      <div class="result-card">
+        <div class="card-icon">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#4756df"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+            ></path>
+          </svg>
+        </div>
+        <h4 class="card-title">Përputhshmëria me Programin</h4>
+        <p class="card-value">96%</p>
+        <p class="card-description">
+          Tirana Business University - Bachelor në Informatikë Ekonomike
+        </p>
+      </div>
+
+      <!-- Career Recommendation Card -->
+      <div class="result-card">
+        <div class="card-icon">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#4756df"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+        </div>
+        <h4 class="card-title">Karriera e Rekomanduar</h4>
+        <p class="card-value">Zhvillues Softueri</p>
+        <p class="card-description">Përputhshmëri 92%</p>
+      </div>
+
+      <!-- Detailed Results -->
+      <div class="detailed-results">
+        <h3 class="detailed-title">Përmbledhje e Rezultateve</h3>
+        <p class="detailed-text">
+          Profili juaj Analitik-Kreativ tregon një kombinim interesant të
+          aftësive për të analizuar informacione komplekse dhe për të gjeneruar
+          ide inovatore. Ju keni aftësinë për të përshtruar probleme të
+          ndërlikuara, por edhe krejtivitetin për të propozuar zgjidhje
+          jo-konvencionale. Kjo ju bën veçanërisht të përshtatshëm për fusha që
+          kërkojnë analiza dhe inovacion në nivel të lartë.
+        </p>
+
+        <div class="strengths-weaknesses">
+          <!-- Strengths Section -->
+          <div class="strengths-section">
+            <h4>Pikat e tua të forta</h4>
+            <div class="strength-item">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#22c55e"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              <span class="strength-text">Zgjidhja e problemeve komplekse</span>
+            </div>
+            <div class="strength-item">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#22c55e"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              <span class="strength-text">Mendimi kritik dhe inovativ</span>
+            </div>
+            <div class="strength-item">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#22c55e"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              <span class="strength-text"
+                >Adaptueshmëri ndaj situatave të reja</span
+              >
+            </div>
+            <div class="strength-item">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#22c55e"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              <span class="strength-text">Aftësi të mira komunikuese</span>
+            </div>
+            <div class="strength-item">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#22c55e"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              <span class="strength-text">Vëmendje ndaj detajeve</span>
+            </div>
+          </div>
+          <!-- Qualities Section -->
+          <div class="qualities-section">
+            <h4>Fushat për zhvillim</h4>
+            <div class="quality-item">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#4756df"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                <line x1="15" y1="9" x2="15.01" y2="9"></line>
+              </svg>
+              <span class="quality-text"
+                >Mund të kesh tendencë drejt perfeksionizmit</span
+              >
+            </div>
+            <div class="quality-item">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#4756df"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                <line x1="15" y1="9" x2="15.01" y2="9"></line>
+              </svg>
+              <span class="quality-text"
+                >Nganjëherë mund të jesh të pavëndosur midis logjikës dhe
+                kreativitetit</span
+              >
+            </div>
+            <div class="quality-item">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#4756df"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                <line x1="15" y1="9" x2="15.01" y2="9"></line>
+              </svg>
+              <span class="quality-text"
+                >Mund të shfaqësh nga ditët rutinë ose të përsëritura</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills Section -->
+      <div class="skills-section">
+        <h3 class="skills-title">Aftësitë Kryesore</h3>
+
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Aftësi Analitike</span>
+            <span class="skill-percentage">85%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="width: 85%"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Kreativiteti</span>
+            <span class="skill-percentage">82%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="width: 82%"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Zgjidhja e problemeve</span>
+            <span class="skill-percentage">86%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="width: 86%"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Komunikimi</span>
+            <span class="skill-percentage">75%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="width: 75%"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Punë në ekip</span>
+            <span class="skill-percentage">70%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" style="width: 70%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interests Section -->
+      <div class="interests-section">
+        <h3 class="interests-title">Interesat Kryesore</h3>
+
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Teknologji</span>
+            <span class="skill-percentage-2">92%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress-2" style="width: 92%"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Arte dhe Dizajn</span>
+            <span class="skill-percentage-2">80%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress-2" style="width: 80%"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Shkenca</span>
+            <span class="skill-percentage-2">85%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress-2" style="width: 85%"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Biznes</span>
+            <span class="skill-percentage-2">65%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress-2" style="width: 65%"></div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-name">
+            <span>Shkenca sociale</span>
+            <span class="skill-percentage-2">60%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress-2" style="width: 60%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Back to Tests Button -->
+      <a href="challenges.html" class="back-button" id="backButton"
+        >Kthehu te Testet</a
+      >
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2025 Match with Your Future. Të gjitha të drejtat të rezervuara.</p>
+    </footer>
+
+    <script>
+      // Button functionality to go to challenges page
+      document
+        .getElementById("backButton")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          window.location.href = "challenges.html";
+        });
+
+      // Share button functionality
+      document
+        .querySelector(".share-button")
+        .addEventListener("click", function () {
+          alert("Rezultatet janë duke u shkarkuar...");
+          // Here you could implement actual download functionality
+        });
+
+      // Animation for skill bars on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        const skillBars = document.querySelectorAll(".skill-progress");
+
+        skillBars.forEach((bar) => {
+          const width = bar.style.width;
+          bar.style.width = "0";
+
+          setTimeout(() => {
+            bar.style.transition = "width 1s ease-in-out";
+            bar.style.width = width;
+          }, 300);
+        });
+      });
+    </script>
+  </body>
+</html>
